@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <div class="relative pt-16 pb-32 flex content-center items-center justify-center min-h-screen">
+    <div class="relative pt-12 pb-20 flex content-center items-center justify-center min-h-[90vh]">
         <div class="absolute top-0 w-full h-full bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');">
             <span class="w-full h-full absolute opacity-50 bg-black"></span>
         </div>
@@ -12,9 +12,9 @@
             <div class="items-center flex flex-wrap">
                 <div class="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
                     <div class="text-white">
-                        <h1 class="text-5xl font-semibold leading-tight mb-4">Discover Your Perfect Drive</h1>
-                        <p class="text-xl leading-relaxed mt-4 mb-8">Experience luxury, performance, and comfort with our premium selection of vehicles. Your journey to the perfect car starts here.</p>
-                        <a href="#featured-cars" class="bg-blue-600 text-white font-bold px-8 py-4 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out inline-block">
+                        <h1 class="text-4xl font-semibold leading-tight mb-3">Discover Your Perfect Drive</h1>
+                        <p class="text-lg leading-relaxed mt-3 mb-6">Experience luxury, performance, and comfort with our premium selection of vehicles. Your journey to the perfect car starts here.</p>
+                        <a href="#featured-cars" class="bg-blue-600 text-white font-bold px-6 py-3 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out inline-block">
                             Explore Our Collection
                         </a>
                     </div>
@@ -184,11 +184,11 @@
                             <div class="space-y-4">
                                 <div class="flex items-center">
                                     <i class="fas fa-map-marker-alt text-blue-600 text-xl w-8"></i>
-                                    <span class="text-gray-600 dark:text-gray-300">123 Car Street, Auto City, AC 12345</span>
+                                    <span class="text-gray-600 dark:text-gray-300">123 Kasoa, Ghana</span>
                                 </div>
                                 <div class="flex items-center">
                                     <i class="fas fa-phone text-blue-600 text-xl w-8"></i>
-                                    <span class="text-gray-600 dark:text-gray-300">(555) 123-4567</span>
+                                    <span class="text-gray-600 dark:text-gray-300">(020) 123-4567</span>
                                 </div>
                                 <div class="flex items-center">
                                     <i class="fas fa-envelope text-blue-600 text-xl w-8"></i>
@@ -198,15 +198,15 @@
                         </div>
                         <div>
                             <h3 class="text-2xl font-semibold mb-6 dark:text-white">Send us a Message</h3>
-                            <form>
+                            <form id="contactForm" action="https://formspree.io/f/mzzewpbo" method="POST">
                                 <div class="mb-4">
-                                    <input type="text" placeholder="Your Name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                    <input type="text" placeholder="Your Name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="email" placeholder="Your Email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                    <input type="email" placeholder="Your Email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 </div>
                                 <div class="mb-4">
-                                    <textarea rows="4" placeholder="Your Message" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
+                                    <textarea rows="4" placeholder="Your Message" name="message" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
                                 </div>
                                 <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">Send Message</button>
                             </form>
@@ -267,4 +267,34 @@
         }
     }
 </style>
+@endpush
+
+@push('scripts')
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this),
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                // Reset the form
+                this.reset();
+                
+                // Show success message
+                alert('Thank you for your message! We will get back to you soon.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error sending your message. Please try again.');
+        });
+    });
+</script>
 @endpush

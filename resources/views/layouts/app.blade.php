@@ -150,11 +150,8 @@
                  id="sidebar">
                 <div class="flex flex-col h-full">
                     <!-- Logo -->
-                    <div class="flex items-center justify-between p-4 border-b dark:border-gray-700">
+                    <div class="flex items-center p-4 border-b dark:border-gray-700">
                         <span class="text-xl font-bold text-gray-900 dark:text-white">RideHub</span>
-                        <button class="lg:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" onclick="toggleSidebar()">
-                            <i class="fas fa-times"></i>
-                        </button>
                     </div>
 
                     <!-- Navigation -->
@@ -179,15 +176,15 @@
                             <!-- Cars Submenu -->
                             <div class="hidden pl-10 space-y-2" id="carsSubmenu">
                                 <a href="{{ route('cars.benz') }}" 
-                                   class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                                   class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 {{ request()->routeIs('cars.benz') ? 'bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300' : '' }}">
                                     <span>Benz</span>
                                 </a>
                                 <a href="{{ route('cars.kia') }}" 
-                                   class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                                   class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 {{ request()->routeIs('cars.kia') ? 'bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300' : '' }}">
                                     <span>Kia</span>
                                 </a>
                                 <a href="{{ route('cars.honda') }}" 
-                                   class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                                   class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 {{ request()->routeIs('cars.honda') ? 'bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300' : '' }}">
                                     <span>Honda</span>
                                 </a>
                             </div>
@@ -219,7 +216,7 @@
             <!-- Main Content Area -->
             <div class="lg:pl-64">
                 <!-- Header -->
-                <header class="bg-white dark:bg-gray-800 shadow-sm">
+                {{-- <header class="bg-white dark:bg-gray-800 shadow-sm">
                     <div class="flex items-center justify-between px-4 py-4 lg:px-8">
                         <button class="lg:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" onclick="toggleSidebar()">
                             <i class="fas fa-bars"></i>
@@ -227,7 +224,7 @@
                         <h1 class="text-xl font-semibold text-gray-900 dark:text-white">@yield('header', 'Dashboard')</h1>
                         <div></div>
                     </div>
-                </header>
+                </header> --}}
 
                 <!-- Page Content -->
                 <main class="py-6">
